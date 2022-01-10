@@ -1,6 +1,0 @@
-org/dhana/family/Member.java
- org.dhana.family.Member
-org/dhana/family/FamilyTree.java
- org.dhana.family.FamilyTree
-org/dhana/Main.java
- org.dhana.Main
