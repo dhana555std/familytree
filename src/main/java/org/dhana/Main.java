@@ -5,6 +5,11 @@ import java.util.Set;
 import org.dhana.family.FamilyTree;
 import org.dhana.family.Member;
 
+/**
+ * @author  Dhanapathi Marepalli.
+ * The class where the Execution starts.
+ *
+ */
 public class Main {
     public static void main(String[] args) {
         FamilyTree familyTree = new FamilyTree();
@@ -16,13 +21,13 @@ public class Main {
         member.addParent(father);
         member.addParent(mother);
 
-        // KIDS
+        // Add KIDS
         Member kid1 = getMember("Gayatri", 9, 'F');
         Member kid2 = getMember("Pranavi", 5, 'F');
         member.addKid(kid1);
         member.addKid(kid2);
 
-        // Grand KIDS
+        // Add Grand KIDS
         Member gk1 = getMember("Kalyan", 1, 'M');
         Member gk2 = getMember("Meher", 1, 'F');
         kid1.addKid(gk1);
@@ -34,14 +39,14 @@ public class Main {
         kid2.addKid(gk3);
         kid2.addKid(gk4);
 
-        // Grand Parents
+        // Add Grand Parents
         Member grandFather = getMember("Sr. Dhanapathi", 85, 'M');
         Member grandMother = getMember("Kanaka Durga", 78, 'F');
 
         father.addParent(grandFather);
         father.addParent(grandMother);
 
-        // Great Grand Parents
+        // Add Great Grand Parents
         Member greatGrandFather = getMember("Subba Rao", 94, 'M');
         Member greatGrandMother = getMember("Lalitha", 80, 'F');
 
@@ -50,7 +55,7 @@ public class Main {
 
         familyTree.addFamily("Marepalli", member);
 
-        // Kaka family.
+        // Add new family.
         Member kaka = getMember("Kaka", 31, 'M');
         Member kakaNanna = getMember("Kaka", 61, 'M');
         Member kakaAmma = getMember("Kaka", 51, 'F');
@@ -69,16 +74,24 @@ public class Main {
         System.out.println("Great Grand Father: " + marepalli.getFather().getFather().getFather());
         marepalli.getKids().forEach(x -> System.out.println(x.getKids()));
 
+        // Display members in the sorted order.
         Set<Member> marepalliMembers = familyTree.displayFamilyMembersByAge("Marepalli");
-
         System.out.println("Members in the sorted order of age:-\n");
         marepalliMembers.forEach(System.out:: println);
 
+        // Add a new Member to the existing sorted members ensuring he is in the right order.
         System.out.println("Add member to sorted family:-");
         marepalliMembers = familyTree.addMemberToSortedFamily(marepalliMembers, getMember("Parvthi", 2, 'F'));
         marepalliMembers.forEach(System.out:: println);
     }
 
+    /**
+     * Helper method to create a {@link Member}.
+     * @param name name of the {@link Member}.
+     * @param age age of the {@link Member}.
+     * @param gender gender of the {@link Member}.
+     * @return the {@link Member} created.
+     */
     private static Member getMember(String name, int age, char gender) {
         Member member = new Member();
         member.setName(name);
