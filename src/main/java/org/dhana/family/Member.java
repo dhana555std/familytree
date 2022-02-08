@@ -2,6 +2,8 @@ package org.dhana.family;
 
 import java.util.*;
 
+import org.dhana.utils.MemberUtils;
+
 /**
  * @author Dhanapathi Marepalli
  * Class representing the Family Member in the family tree. This class represents a Node in the Family Hierarchy.
@@ -91,14 +93,13 @@ public class Member {
 
     /**
      * Display the family members in the sorted order.
-     * @param sortOrder the {@link Comparator} defining the sorted order.
      * @return {@link Set} of family members sorted based on the `sortedOrder` passed in.
      */
-    Set<Member> displayFamilyMembers(Comparator<Member> sortOrder) {
-        Set<Member> members = new TreeSet<>(sortOrder);
-        members.add(this);
-        addAncestors(this, members);
-        addDescendants(this, members);
+    List<Member> displayFamilyMembers() {
+        List<Member> members = new LinkedList<>();
+        MemberUtils.addMemberInSortedOrder(this, members);
+        addAncestorsInSortedOrder(this, members);
+        addDescendantsInSortedOrder(this, members);
         return members;
     }
 
@@ -109,30 +110,29 @@ public class Member {
      * @param member the current member.
      * @param members the final set of sorted members in the family.
      */
-    private void addAncestors(Member member, Set<Member> members) {
+    private void addAncestorsInSortedOrder(Member member, List<Member> members) {
         if (member.father != null) {
-            members.add(member.father);
-            addAncestors(member.father, members);
+            MemberUtils.addMemberInSortedOrder(member.father, members);
+            addAncestorsInSortedOrder(member.father, members);
         }
 
         if (member.mother != null) {
-            members.add(member.mother);
-            addAncestors(member.mother, members);
+            MemberUtils.addMemberInSortedOrder(member.mother, members);
+            addAncestorsInSortedOrder(member.mother, members);
         }
     }
 
     /**
      * Add the descendants i.e. the kids and the grand children of the current `member`
      * to the `members` set in the sorted order.
-     *
-     * @param member the current member.
+     *  @param member the current member.
      * @param members the final set of sorted members in the family.
      */
-    private void addDescendants(Member member, Set<Member> members) {
-        members.add(member);
+    private void addDescendantsInSortedOrder(Member member, List<Member> members) {
+        MemberUtils.addMemberInSortedOrder(member, members);
         if (member.kids != null && !member.kids.isEmpty()) {
             for (Member kid : member.kids) {
-                addDescendants(kid, members);
+                addDescendantsInSortedOrder(kid, members);
             }
         }
     }

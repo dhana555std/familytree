@@ -1,5 +1,6 @@
 package org.dhana;
 
+import java.util.List;
 import java.util.Set;
 
 import org.dhana.family.FamilyTree;
@@ -72,16 +73,17 @@ public class Main {
         System.out.println("Kids: " + marepalli.getKids());
         System.out.println("Grand Father: " + marepalli.getFather().getFather());
         System.out.println("Great Grand Father: " + marepalli.getFather().getFather().getFather());
+        System.out.println("Grand children: ");
         marepalli.getKids().forEach(x -> System.out.println(x.getKids()));
 
         // Display members in the sorted order.
-        Set<Member> marepalliMembers = familyTree.displayFamilyMembersByAge("Marepalli");
+        List<Member> marepalliMembers = familyTree.displayFamilyMembersByAge("Marepalli");
         System.out.println("Members in the sorted order of age:-\n");
         marepalliMembers.forEach(System.out:: println);
 
         // Add a new Member to the existing sorted members ensuring he is in the right order.
         System.out.println("Add member to sorted family:-");
-        marepalliMembers = familyTree.addMemberToSortedFamily(marepalliMembers, getMember("Parvthi", 2, 'F'));
+        marepalliMembers = familyTree.addMemberToSortedFamily(getMember("Gayatri Ananta", 58, 'F'), marepalliMembers);
         marepalliMembers.forEach(System.out:: println);
     }
 
