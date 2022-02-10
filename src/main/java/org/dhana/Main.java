@@ -1,7 +1,8 @@
 package org.dhana;
 
+import static org.dhana.utils.MemberUtils.getMember;
+
 import java.util.List;
-import java.util.Set;
 
 import org.dhana.family.FamilyTree;
 import org.dhana.family.Member;
@@ -83,22 +84,10 @@ public class Main {
 
         // Add a new Member to the existing sorted members ensuring he is in the right order.
         System.out.println("Add member to sorted family:-");
-        marepalliMembers = familyTree.addMemberToSortedFamily(getMember("Gayatri Ananta", 58, 'F'), marepalliMembers);
+        marepalliMembers = familyTree.addMemberToSortedFamily(getMember("Gayatri Ananta", 58, 'F'),
+                                                              marepalliMembers);
         marepalliMembers.forEach(System.out:: println);
     }
 
-    /**
-     * Helper method to create a {@link Member}.
-     * @param name name of the {@link Member}.
-     * @param age age of the {@link Member}.
-     * @param gender gender of the {@link Member}.
-     * @return the {@link Member} created.
-     */
-    private static Member getMember(String name, int age, char gender) {
-        Member member = new Member();
-        member.setName(name);
-        member.setAge(age);
-        member.setGender(gender);
-        return member;
-    }
+
 }
