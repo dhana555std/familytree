@@ -1,4 +1,4 @@
-# familytree
+# family tree
 
 ## Prerequisites
 * Java 1.8 or above installed on machine.
